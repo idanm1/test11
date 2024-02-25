@@ -34,3 +34,23 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+
+      - name: test_argocd
+        env:
+          GITHUB_TOKEN: "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"
+
+        
+        run: |
+
+              prs=$(gh pr list)
+              echo $prs
+              if [[ $prs == *"ArgoCD"* ]]; then
+                echo "Merged is BLOCKED! ArgoCD hanging PRs exist."
+                exit 1
+              else
+                echo "NoArgoCD hanging PRs."
+              fi
+
+
+          
